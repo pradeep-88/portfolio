@@ -4,7 +4,7 @@
 ![Built with React](https://img.shields.io/badge/React-18-blue)
 ![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.x-38bdf8)
 ![Framer Motion](https://img.shields.io/badge/Framer%20Motion-Animations-ff69b4)
-![License](https://img.shields.io/badge/License-MIT-green)
+
 
 A modern, performance-focused **personal portfolio website** built to showcase my work as a **Full-Stack Engineer**, with a strong emphasis on **backend systems, scalable architectures, and clean UI/UX**.
 
