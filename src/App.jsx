@@ -6,6 +6,8 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import GitHubActivity from "./components/GitHubActivity";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import BackToTop from "./components/BackToTop";
 
 export default function App() {
   return (
@@ -18,6 +20,8 @@ export default function App() {
       <Projects />
       <GitHubActivity />
       <Contact />
+      <Footer />
+      <BackToTop />
     </>
   );
 }
