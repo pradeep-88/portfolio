@@ -63,7 +63,7 @@ export default function About() {
             transition={{ duration: 0.5 }}
           >
             <img
-              src="/assets/profile%20pic.png"
+              src="/profile-pic.png"
               alt="Pradeep Rajput"
               className="w-56 h-56 lg:w-64 lg:h-64 rounded-2xl object-cover border border-slate-700/60 shadow-xl ring-2 ring-primary/20"
             />
