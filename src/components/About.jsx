@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { education } from "../data/education";
-import profileImage from "../assets/profile1.png";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -64,7 +63,7 @@ export default function About() {
             transition={{ duration: 0.5 }}
           >
             <img
-              src={profileImage}
+              src="/assets/profile%20pic.png"
               alt="Pradeep Rajput"
               className="w-56 h-56 lg:w-64 lg:h-64 rounded-2xl object-cover border border-slate-700/60 shadow-xl ring-2 ring-primary/20"
             />
