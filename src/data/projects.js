@@ -20,30 +20,27 @@ export const projects = [
     metric: "Full auth, storage, and admin flows",
   },
   {
-    title: "IoT Telemetry Backend",
-    description: "High-throughput pipeline for real-time IoT sensor ingestion and alerting.",
-    techStack: ["FastAPI", "MQTT", "PostgreSQL", "Docker"],
+    title: "AI Quiz",
+    description:
+      "Real-time AI-powered quiz platform where hosts spin up live rooms in seconds and players compete with instant leaderboard updates.",
+    techStack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "TailwindCSS",
+      "Framer Motion",
+      "Zustand",
+      "Socket.IO",
+      "Node.js",
+      "Express",
+      "Redis",
+      "Groq API",
+      "Docker",
+    ],
     details:
-      "Designed and implemented a high-throughput telemetry pipeline handling thousands of sensor events per second. Included real-time dashboards and alerting for anomaly detection.",
+      "Production-ready, real-time quiz platform where AI (Groq Llama 3.1) generates multiple-choice questions on demand by topic, difficulty, and count. Hosts create room-based sessions with 6-character codes, control quiz start and pacing, and see live leaderboards backed by Redis sorted sets. Players join from any device, answer under time pressure with time-based scoring, and see instant ranking updates without page refreshes. The app is Dockerized for easy deployment and uses a dark, responsive UI with motion-enhanced interactions.",
+    link: "https://ai-quiz-fw9h.vercel.app/",
     icon: "Activity",
-    metric: "10k+ events/sec ingestion",
-  },
-  {
-    title: "MQTT Broker for ESP32",
-    description: "Lightweight MQTT broker for embedded devices with QoS and TLS.",
-    techStack: ["C++", "MQTT", "ESP32"],
-    details:
-      "Lightweight MQTT broker implementation for resource-constrained ESP32 devices. Supports QoS levels, retained messages, and TLS for secure IoT deployments.",
-    icon: "Radio",
-    metric: "Resource-constrained deployment",
-  },
-  {
-    title: "ML Analytics Platform",
-    description: "Churn prediction and analytics with feature engineering and model serving API.",
-    techStack: ["Python", "SQL", "FastAPI"],
-    details:
-      "Built ML pipelines for churn prediction with feature engineering from transactional data. REST API for model serving and real-time inference.",
-    icon: "BarChart2",
-    metric: "Production inference API",
+    metric: "AI-generated, real-time multiplayer quizzes",
   },
 ];
