@@ -1,70 +1,83 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { Github, BarChart3 } from "lucide-react";
 import { profile } from "../data/profile";
+import SectionHeading from "./SectionHeading";
 
 const GITHUB_USERNAME = profile.githubUsername;
 const ACTIVITY_GRAPH_URL = `https://github-readme-activity-graph.vercel.app/graph?username=${GITHUB_USERNAME}&theme=react-dark&hide_border=true`;
 const STREAK_STATS_URL = `https://streak-stats.demolab.com/?user=${GITHUB_USERNAME}&theme=react`;
 
+function StatCard({ title, src, alt }) {
+  const [error, setError] = useState(false);
+
+  return (
+    <div
+      className="rounded-md border border-surface-3 bg-surface-1 p-4 md:p-6"
+      style={{ borderRadius: "var(--radius-md)" }}
+    >
+      <div className="flex items-center gap-2 mb-4">
+        <Github className="h-5 w-5 text-accent" />
+        <span className="text-sm font-medium text-text-primary">{title}</span>
+      </div>
+      {error ? (
+        <div className="flex flex-col items-center justify-center py-12 text-text-tertiary">
+          <BarChart3 className="h-10 w-10 mb-2 opacity-50" />
+          <span className="text-sm">Stats unavailable</span>
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={alt}
+          className="w-full block rounded-md"
+          style={{ borderRadius: "var(--radius-md)" }}
+          width="100%"
+          height="auto"
+          loading="lazy"
+          onError={() => setError(true)}
+        />
+      )}
+    </div>
+  );
+}
+
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 export default function GitHubActivity() {
+  const reduced = prefersReducedMotion();
+
   return (
     <motion.section
       id="github-activity"
       className="relative overflow-hidden py-24 md:py-28"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
+      initial={reduced ? {} : { opacity: 0 }}
+      whileInView={reduced ? {} : { opacity: 1 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5 }}
     >
-      <div
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-900/40 via-dark to-slate-900/50"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_40%_at_50%_0%,rgba(34,197,94,0.06),transparent)]"
-        aria-hidden
-      />
+      <div className="absolute inset-0 -z-10 bg-surface-0" aria-hidden />
 
-      <div className="mx-auto max-w-5xl px-6">
-        <motion.header
-          className="mb-14 text-center"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-        >
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-            GitHub Activity
-          </h2>
-          <p className="mt-3 text-slate-400 md:text-lg">
-            Contribution graph and streak stats.
-          </p>
-        </motion.header>
+      <div className="max-w-section mx-auto px-6 md:px-12">
+        <SectionHeading label="05 — github" title="GitHub Activity" />
 
         <motion.div
-          className="rounded-2xl border border-slate-700/60 bg-slate-800/40 p-4 shadow-lg backdrop-blur-sm md:p-6"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="flex flex-col gap-6"
+          initial={reduced ? {} : { opacity: 0, y: 20 }}
+          whileInView={reduced ? {} : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
         >
-          <div className="flex flex-col gap-6">
-            <div className="w-full max-w-4xl mx-auto overflow-hidden rounded-lg">
-              <img
-                src={ACTIVITY_GRAPH_URL}
-                alt="GitHub contribution graph"
-                className="w-full h-auto"
-                loading="lazy"
-              />
-            </div>
-            <div className="w-full max-w-2xl mx-auto overflow-hidden rounded-lg">
-              <img
-                src={STREAK_STATS_URL}
-                alt="GitHub contribution streaks"
-                className="w-full h-auto"
-                loading="lazy"
-              />
-            </div>
-          </div>
+          <StatCard
+            title="Contribution graph"
+            src={ACTIVITY_GRAPH_URL}
+            alt="GitHub contribution graph"
+          />
+          <StatCard
+            title="Streak stats"
+            src={STREAK_STATS_URL}
+            alt="GitHub contribution streaks"
+          />
         </motion.div>
       </div>
     </motion.section>

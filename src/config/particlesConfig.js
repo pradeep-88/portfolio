@@ -5,13 +5,13 @@ export const particlesOptions = {
   particles: {
     number: { value: 32 },
     color: {
-      value: ["#f8fafc", "#94a3b8", "#a5b4fc"],
+      value: ["#22c55e"],
     },
     size: {
       value: { min: 0.4, max: 1.2 },
     },
     opacity: {
-      value: { min: 0.12, max: 0.28 },
+      value: { min: 0.2, max: 0.4 },
     },
     move: {
       enable: true,

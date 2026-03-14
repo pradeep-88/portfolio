@@ -1,62 +1,88 @@
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Briefcase } from "lucide-react";
+import SectionHeading from "./SectionHeading";
+import Tag from "./Tag";
+import { useSpotlight } from "../hooks/useSpotlight";
+
+const CHECK_SVG = (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="shrink-0 text-accent" aria-hidden>
+    <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const BULLETS = [
+  "Built scalable backend services and REST APIs",
+  "Optimized SQL queries improving latency by 25%+",
+  "Developed reusable data processing pipelines",
+];
+
+const TECH_TAGS = ["Node.js", "SQL", "REST APIs", "Data pipelines"];
+
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export default function Experience() {
+  const cardRef = useRef(null);
+  useSpotlight(cardRef);
+  const reduced = prefersReducedMotion();
+
   return (
     <motion.section
       id="experience"
       className="relative overflow-hidden py-24 md:py-28"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
+      initial={reduced ? {} : { opacity: 0 }}
+      whileInView={reduced ? {} : { opacity: 1 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.5 }}
     >
-      <div
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-900/40 via-dark to-slate-900/50"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_40%_at_50%_100%,rgba(34,197,94,0.06),transparent)]"
-        aria-hidden
-      />
-
-      <div className="mx-auto max-w-5xl px-6">
-        <motion.header
-          className="mb-14 text-center"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-        >
-          <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
-            Experience
-          </h2>
-          <p className="mt-3 text-slate-400 md:text-lg">
-            Where I’ve built and shipped.
-          </p>
-        </motion.header>
+      <div className="absolute inset-0 -z-10 bg-surface-0" aria-hidden />
+      <div className="max-w-section mx-auto px-6 md:px-12">
+        <SectionHeading label="02 — experience" title="Experience" />
 
         <motion.div
-          className="max-w-2xl mx-auto rounded-2xl border border-slate-700/60 bg-slate-800/40 p-6 shadow-lg backdrop-blur-sm md:p-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          ref={cardRef}
+          className="spotlight-card max-w-2xl mx-auto rounded-md border border-surface-3 bg-surface-1 p-6 md:p-8 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_var(--accent-glow)]"
+          style={{
+            borderRadius: "var(--radius-md)",
+            borderLeftWidth: "4px",
+            borderLeftColor: "var(--accent)",
+          }}
+          initial={reduced ? {} : { opacity: 0, y: 20 }}
+          whileInView={reduced ? {} : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
         >
           <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-700/80 text-primary">
-              <Briefcase className="h-5 w-5" strokeWidth={1.8} />
+            <div
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-accent text-surface-0 text-lg font-semibold"
+              style={{ borderRadius: "var(--radius-sm)" }}
+            >
+              P
             </div>
-            <div>
-              <h3 className="text-xl font-semibold text-white">
-                Full-Stack Engineer — PREPZR
-              </h3>
-              <p className="text-slate-400 text-sm mt-1">Feb 2026 – Present</p>
-              <ul className="mt-4 space-y-2 text-slate-400 text-sm list-disc list-inside">
-                <li>Built scalable backend services and REST APIs</li>
-                <li>Optimized SQL queries improving latency by 25%+</li>
-                <li>Developed reusable data processing pipelines</li>
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="text-lg font-semibold text-text-primary">
+                  Full-Stack Engineer — PREPZR
+                </h3>
+                <span className="text-text-tertiary text-sm">Feb 2026 – Present</span>
+              </div>
+              <ul className="mt-4 space-y-2">
+                {BULLETS.map((text, i) => (
+                  <li key={i} className="flex items-start gap-2 text-text-secondary text-sm">
+                    {CHECK_SVG}
+                    <span>{text}</span>
+                  </li>
+                ))}
               </ul>
+              <div className="flex flex-wrap gap-2 mt-6 pt-4 border-t border-surface-3">
+                <span className="text-text-tertiary text-[12px] font-medium w-full mb-1">Tech used</span>
+                {TECH_TAGS.map((tech) => (
+                  <Tag key={tech} size="sm">
+                    {tech}
+                  </Tag>
+                ))}
+              </div>
             </div>
           </div>
         </motion.div>

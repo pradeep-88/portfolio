@@ -23,7 +23,8 @@ export default function BackToTop() {
         <motion.button
           type="button"
           aria-label="Back to top"
-          className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full border border-slate-700/60 bg-slate-800/90 text-slate-300 shadow-lg backdrop-blur-sm transition-colors hover:border-primary/40 hover:text-primary"
+          className="fixed z-40 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-surface-0 shadow-lg transition-opacity hover:opacity-90"
+          style={{ bottom: "2rem", right: "2rem" }}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
