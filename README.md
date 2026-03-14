@@ -1,158 +1,214 @@
-# Portfolio — Personal Website
+<div align="center">
 
-A single-page portfolio site built with **React**, **Vite**, and **Tailwind CSS**. It showcases profile info, education, experience, skills, featured projects, GitHub activity widgets, and contact links. The app is responsive, uses smooth scroll and viewport-based animations (Framer Motion), and includes an optional particle background on larger screens.
+```
+██████╗ ██████╗  █████╗ ██████╗ ███████╗███████╗██████╗
+██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝██╔══██╗
+██████╔╝██████╔╝███████║██║  ██║█████╗  █████╗  ██████╔╝
+██╔═══╝ ██╔══██╗██╔══██║██║  ██║██╔══╝  ██╔══╝  ██╔═══╝
+██║     ██║  ██║██║  ██║██████╔╝███████╗███████╗██║
+╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝╚═╝
+```
 
----
+### Pradeep Rajput — Personal Portfolio
 
-## Purpose
+*The internet's version of me. Handcrafted. No templates. No compromises.*
 
-This repository is the source code for **Pradeep Rajput’s** personal portfolio, intended to be deployed (e.g. Netlify, Vercel) and linked from the GitHub profile. Content is driven by local data files so name, links, projects, education, and skills can be updated without changing component logic.
+[![Live](https://img.shields.io/badge/🌐_Live_Site-22c55e?style=for-the-badge&logoColor=white)](https://pradeeprajput-portfolio.netlify.app)
+[![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite_5-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
+[![Tailwind](https://img.shields.io/badge/Tailwind_CSS-0f172a?style=for-the-badge&logo=tailwindcss&logoColor=38bdf8)](https://tailwindcss.com)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion)
 
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| **Runtime** | Node.js (development/build) |
-| **Framework** | React 18 |
-| **Build** | Vite 5 (ESM) |
-| **Styling** | Tailwind CSS 3, PostCSS, Autoprefixer |
-| **Animations** | Framer Motion 10 |
-| **Icons** | Lucide React |
-| **Particles** | @tsparticles/react + @tsparticles/slim |
-
-- **Language:** JavaScript (JSX). No TypeScript.
-- **Package manager:** npm (`package.json` uses `"type": "module"`).
+</div>
 
 ---
 
-## Repository Structure
+## What's inside
+
+Not your average portfolio. Every pixel is intentional.
+
+- **Custom cursor** with a spotlight that follows your mouse inside cards — the same subtle glow effect you've seen on Linear and Vercel
+- **⌘K Command Palette** — keyboard-first navigation, copy email, open resume, toggle theme, all without touching the mouse
+- **Scroll progress bar** — a 2px accent line at the top of the viewport. Small. Tells you everything.
+- **Card spotlight effect** — radial gradient that tracks your cursor inside every project and experience card
+- **Light / dark mode** — persisted in `localStorage`, toggled from the navbar or the command palette
+- **Typewriter hero** — role titles cycle with a blinking cursor, no library, just a `setInterval`
+- **Animated stat counters** — numbers count up on scroll entry using `requestAnimationFrame` and an easing curve
+- **Project case study modals** — click any project card for a deeper write-up. The `details` field in `projects.js` finally earns its keep.
+- **Skill proficiency tooltips** — hover a skill tag to see a 5-dot proficiency bar and level label
+- **"Currently" section** — what I'm building, learning, and reading. Updated manually. More honest than a skill percentage bar.
+- **Lazy-loaded GitHub activity** — streaks and contribution graphs load only when you scroll near them, with graceful error fallbacks
+- **Full Open Graph + Twitter Card meta** — looks good when shared on Slack, LinkedIn, or anywhere else
+- **PWA manifest + custom favicon** — "PR" monogram in accent green, no more default Vite icon
+- **Styled 404 page** — because someone always manages to find it
+
+---
+
+## Stack
+
+| Concern | Choice | Why |
+|---|---|---|
+| Framework | React 18 | Concurrent features, mature ecosystem |
+| Build | Vite 5 (ESM) | Sub-second HMR, no config needed |
+| Styling | Tailwind CSS 3 + CSS custom properties | Utility-first with a real design token layer |
+| Animation | Framer Motion 10 | `whileInView`, `AnimatePresence`, spring physics |
+| Icons | Lucide React | Consistent stroke width, tree-shakeable |
+| Particles | @tsparticles/slim | Disabled on mobile, low overhead |
+| Language | JavaScript (JSX) | No TypeScript — fast to iterate, easy to read |
+
+No backend. No environment variables. No build secrets. Just `npm run build` and deploy.
+
+---
+
+## Project structure
 
 ```
 portfolio/
-├── index.html              # Entry HTML; root div #root; Inter font from Google Fonts
-├── package.json             # Scripts: dev, build, preview; dependencies listed above
-├── vite.config.js           # Vite + React plugin only; no base path or env vars
-├── tailwind.config.js       # content: index.html + src/**/*.{js,jsx}; theme: primary #22c55e, dark #0f172a; font Inter
-├── postcss.config.js        # tailwindcss + autoprefixer
-├── README.md                # This file
-├── public/                  # Static assets served at /
-│   ├── profile-pic.png      # Used in About section
-│   └── resume.pdf           # Used in Hero (Download Resume) and ResumeModal (preview + download)
+├── public/
+│   ├── profile-pic.png        # Drop your photo here
+│   ├── resume.pdf             # Your resume — downloaded as Pradeep_Rajput_Resume.pdf
+│   ├── favicon.svg            # "PR" monogram in #22c55e on #0f172a
+│   └── og-image.png           # 1200×630 — what appears when the URL is shared
+│
 ├── src/
-│   ├── main.jsx             # ReactDOM.createRoot(#root); renders <App />; imports globals.css
-│   ├── App.jsx              # Composes all sections in order: Navbar, Hero, About, Experience, Skills, Projects, GitHubActivity, Contact, Footer, BackToTop
+│   ├── data/                  # ← All content lives here. Touch nothing else to update copy.
+│   │   ├── profile.js         # Name, email, socials, GitHub username
+│   │   ├── projects.js        # Title, description, tech, details, link, metric
+│   │   ├── skills.js          # Categories, icons, skill names, proficiency levels
+│   │   ├── education.js       # Degree, institution, period
+│   │   └── now.js             # What you're building / learning / reading right now
+│   │
+│   ├── components/            # One file per component. Default exports throughout.
+│   │   ├── Navbar.jsx         # Frosted glass, sliding active indicator, scroll progress bar
+│   │   ├── Hero.jsx           # Typewriter, fake VS Code editor, particles, CTA buttons
+│   │   ├── About.jsx          # Photo with glow ring, bio, education timeline
+│   │   ├── Experience.jsx     # Card with left accent border, checklist bullets, tech tags
+│   │   ├── Skills.jsx         # Category grid, SkillTag with proficiency tooltips
+│   │   ├── Projects.jsx       # Masonry-ish grid, case study modal trigger
+│   │   ├── ProjectCard.jsx    # Gradient header, metric pill, spotlight effect
+│   │   ├── GitHubActivity.jsx # Lazy-loaded streak + activity graph with error fallback
+│   │   ├── Contact.jsx        # Three link cards, copy-email-to-clipboard
+│   │   ├── Now.jsx            # Currently section — building / learning / reading
+│   │   ├── Footer.jsx         # Three-column: brand | nav | socials
+│   │   ├── BackToTop.jsx      # Fixed circle button, AnimatePresence fade
+│   │   ├── CustomCursor.jsx   # Dot + lagging ring, scales on hover, hidden on touch
+│   │   ├── CommandPalette.jsx # ⌘K palette, keyboard navigation, 10 commands
+│   │   ├── CaseStudyModal.jsx # Full-screen project deep-dive, Escape to close
+│   │   ├── SkillTag.jsx       # Pill with proficiency tooltip on hover
+│   │   ├── ThemeToggle.jsx    # Sun/Moon with rotate+scale swap animation
+│   │   ├── SectionHeading.jsx # Mono label + large heading, used across all sections
+│   │   ├── Tag.jsx            # Reusable pill — default and accent variants
+│   │   └── ParticlesBackground.jsx
+│   │
+│   ├── hooks/
+│   │   ├── useCursor.js       # Tracks mouse, sets --cx/--cy on :root, detects hoverable elements
+│   │   ├── useSpotlight.js    # Tracks mouse inside a card, sets --mx/--my for gradient
+│   │   └── useCountUp.js      # requestAnimationFrame counter with easeOutQuart, fires once on inView
+│   │
+│   ├── context/
+│   │   └── ThemeContext.jsx   # dark/light toggle, persisted in localStorage
+│   │
 │   ├── styles/
-│   │   └── globals.css      # Tailwind directives; smooth scroll; scroll-margin-top for section ids; focus-visible ring; bg-dark
-│   ├── data/                # Content only; no UI
-│   │   ├── profile.js       # resumeUrl, socialLinks (github, linkedin, email), contact.email, githubUsername
-│   │   ├── projects.js      # Array of { title, description, techStack, details, link, icon, metric }; optional github
-│   │   ├── skills.js        # skillCategories: [{ id, label, icon, skills[] }]; icon names match Lucide components in Skills.jsx
-│   │   └── education.js     # Array of { degree, specialization, institution, period }
-│   ├── config/
-│   │   └── particlesConfig.js  # tsparticles options: no fullScreen; particle count/size/opacity/speed; no links; no interactivity
-│   └── components/          # All functional components; default exports
-│       ├── Navbar.jsx       # Fixed top nav; section links from SECTIONS; IntersectionObserver for active section; mobile menu (Menu/X)
-│       ├── Hero.jsx         # Full-viewport hero; ParticlesBackground; title + tagline; Download Resume button opens ResumeModal
-│       ├── About.jsx        # Section id="about"; profile image from /profile-pic.png; education list from data/education.js
-│       ├── Experience.jsx   # Section id="experience"; single hardcoded role (Full-Stack Engineer — PREPZR) with bullet list
-│       ├── Skills.jsx       # Section id="skills"; grid of skill categories from data/skills.js; iconMap: Code2, Layout, Server, Database, Brain, GitBranch, Cloud
-│       ├── Projects.jsx     # Section id="projects"; ParticlesBackground; grid of ProjectCard from data/projects.js
-│       ├── ProjectCard.jsx   # Receives project + index; icon from iconMap (Smile, Image, Activity, etc.); techStack tags; Live demo / GitHub links
-│       ├── GitHubActivity.jsx # Section id="github-activity"; embeds external images: activity graph (github-readme-activity-graph.vercel.app), streak (streak-stats.demolab.com); username from profile.githubUsername
-│       ├── Contact.jsx       # Section id="contact"; GitHub, LinkedIn, Email from profile.socialLinks; displays profile.contact.email
-│       ├── Footer.jsx        # Copyright + same social links as icons
-│       ├── BackToTop.jsx     # Fixed button after scroll > 400px; smooth scroll to top; AnimatePresence
-│       ├── ResumeModal.jsx   # Modal: backdrop + iframe /resume.pdf + Download PDF (triggers download of resume.pdf as Pradeep_Rajput_Resume.pdf); Escape to close; body scroll lock when open
-│       └── ParticlesBackground.jsx # Optional: disabled for viewport width < 640px; uses particlesConfig; pointer-events-none; accepts id and className
+│   │   ├── globals.css        # Tailwind directives, scrollbar, selection color, cursor: none
+│   │   └── tokens.css         # CSS custom properties — the single source of design truth
+│   │
+│   └── config/
+│       └── particlesConfig.js
+│
+├── tailwind.config.js         # Extends theme with token-mapped colors + JetBrains Mono
+├── vite.config.js
+└── index.html                 # OG meta, Twitter Card, canonical, favicon, font preloads
 ```
 
 ---
 
-## Data Contracts
+## Getting started
 
-### `src/data/profile.js`
+```bash
+# Clone
+git clone https://github.com/pradeeprajput/portfolio.git
+cd portfolio
 
-- **profile.resumeUrl** — URL for “view resume” (e.g. Google Drive). Not used by ResumeModal; modal uses `/resume.pdf` and `profile-pic.png` is from `public/`.
-- **profile.socialLinks** — `{ github, linkedin, email }`. Used by Contact, Footer, and any link that needs the profile’s social URLs.
-- **profile.contact.email** — Shown in Contact section.
-- **profile.githubUsername** — Used by `GitHubActivity.jsx` to build URLs for activity graph and streak images.
+# Install
+npm install
 
-### `src/data/projects.js`
+# Dev server — http://localhost:5173
+npm run dev
 
-Each project: `title`, `description`, `techStack` (array of strings), `details` (longer text, currently unused in UI), `link` (live demo URL), `icon` (Lucide icon name used in `ProjectCard` iconMap), `metric` (short highlight line). Optional: `github` (repo URL) for “GitHub” button in `ProjectCard`.
+# Production build
+npm run build
 
-### `src/data/skills.js`
+# Preview the build locally
+npm run preview
+```
 
-**skillCategories:** each `{ id, label, icon, skills }`. `icon` must match a key in `Skills.jsx` iconMap (Code2, Layout, Server, Database, Brain, GitBranch, Cloud).
-
-### `src/data/education.js`
-
-Array of `{ degree, specialization, institution, period }`. Rendered in About as a vertical timeline with left border.
-
----
-
-## Section IDs and Navigation
-
-These IDs are used for in-page navigation and scroll-margin (see `globals.css`):
-
-- `#about`
-- `#experience`
-- `#skills`
-- `#projects`
-- `#github-activity`
-- `#contact`
-
-`Navbar.jsx` defines `SECTIONS` with these ids and labels; it uses IntersectionObserver to set the “active” section for styling. Clicking a nav link scrolls to the corresponding section (smooth scroll via CSS).
+Zero environment variables. Zero configuration. It just runs.
 
 ---
 
-## Styling and Theming
+## Making it yours
 
-- **Tailwind:** Content paths are `./index.html` and `./src/**/*.{js,jsx}`. Custom theme: `primary: "#22c55e"`, `dark: "#0f172a"`, `fontFamily.sans: ["Inter", ...]`, `boxShadow.glow` for primary glow.
-- **globals.css:** `html` smooth scroll; `body` uses `bg-dark` and `text-white`; section IDs get `scroll-margin-top: 5rem`; focus-visible ring for a11y.
+Everything you need to change is in `src/data/`. The components are wired to read from these files — you never need to open a component to update content.
 
----
+```
+src/data/profile.js   → your name, email, GitHub username, social links
+src/data/projects.js  → your projects (title, description, tech, details, live link, metric)
+src/data/skills.js    → your skill categories and proficiency levels (1–5)
+src/data/education.js → your degrees and institutions
+src/data/now.js       → what you're working on right now
+```
 
-## External Dependencies (Third-Party Services)
+Then swap these two files in `public/`:
+```
+profile-pic.png  → your photo (any square-ish image works)
+resume.pdf       → your resume (downloaded as YourName_Resume.pdf from the modal)
+```
 
-- **GitHub Activity:** `GitHubActivity.jsx` loads two images by username from `profile.githubUsername`:
-  - Activity graph: `https://github-readme-activity-graph.vercel.app/graph?username=...&theme=react-dark&hide_border=true`
-  - Streak: `https://streak-stats.demolab.com/?user=...&theme=react`
-- **Fonts:** Inter from Google Fonts (link in `index.html`).
+And update the download filename in `ResumeModal.jsx`:
+```js
+a.download = 'YourName_Resume.pdf';  // line ~12
+```
 
-No API keys or environment variables are required for the app to run.
-
----
-
-## Scripts
-
-- **`npm run dev`** — Start Vite dev server (default port, e.g. 5173).
-- **`npm run build`** — Production build (output typically `dist/`).
-- **`npm run preview`** — Serve the production build locally.
-
----
-
-## Static Assets
-
-- **public/profile-pic.png** — Referenced in About as `src="/profile-pic.png"`.
-- **public/resume.pdf** — Referenced in ResumeModal as `PDF_URL = "/resume.pdf"`; download filename is `Pradeep_Rajput_Resume.pdf`.
-
-Vite serves `public/` at the root, so no `import` is needed for these.
+That's it. Everything else — the cursor, the spotlight, the command palette, the animations — just works around your content.
 
 ---
 
 ## Deployment
 
-The app is a static SPA. After `npm run build`, deploy the contents of `dist/` to any static host (e.g. Netlify, Vercel). No server-side code or env configuration is required. The live portfolio URL is currently referenced in the owner’s GitHub profile README (e.g. pradeeprajput-portfolio.netlify.app).
+The output of `npm run build` is a static folder (`dist/`). Drop it on any host.
+
+**Netlify** — drag `dist/` into the Netlify dashboard, or connect the repo for auto-deploys. Add `public/_redirects`:
+```
+/* /index.html 200
+```
+
+**Vercel** — import the repo, framework preset is Vite, no configuration needed. The included `vercel.json` handles SPA routing:
+```json
+{ "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }] }
+```
+
+**GitHub Pages** — set base in `vite.config.js` to your repo name, then `npm run build` and push `dist/` to the `gh-pages` branch.
 
 ---
 
-## Summary for AI / Claude
+## Design decisions worth noting
 
-- **What it is:** A single-page React portfolio for Pradeep Rajput, content-driven by `src/data/*.js` (profile, projects, skills, education). Experience is hardcoded in `Experience.jsx`.
-- **Stack:** React 18, Vite 5, Tailwind CSS, Framer Motion, Lucide, tsparticles. No backend, no env vars.
-- **Entry:** `index.html` → `src/main.jsx` → `App.jsx` → sections in order; `App.jsx` is the single source of section order.
-- **Content changes:** Edit `src/data/profile.js`, `projects.js`, `skills.js`, `education.js`; add/replace `public/profile-pic.png` and `public/resume.pdf` as needed.
-- **Behavior:** Fixed navbar with section highlighting; hero with resume modal; About (photo + education); Experience (one role); Skills grid; Projects grid (each card from `projects.js`); GitHub activity iframe images; Contact links; Footer; Back to top. Particles only on viewport width ≥ 640px.
+**CSS custom properties over Tailwind tokens everywhere.** Tailwind is great for layout and spacing. But for a design that needs to respond to a theme toggle in real time, CSS variables win — no class swapping, no flash of unstyled content, just `:root` and `[data-theme="light"]` blocks.
+
+**No routing library.** It's a single page. React Router would add ~50KB for zero benefit. Section IDs and `scrollIntoView` handle all navigation including the command palette.
+
+**The `details` field in `projects.js` was always there but never used.** It now powers the case study modals. If you inherited this codebase, that's free depth waiting to be unlocked.
+
+**Particles are disabled under 640px.** Not a performance shortcut — on mobile, particles behind text hurt readability and add visual noise with no gain.
+
+**`useCountUp` uses `requestAnimationFrame`, not a library.** The whole hook is 25 lines. Adding a counter library for this would be like importing lodash for `array.map`.
+
+---
+
+<div align="center">
+
+Built with too much attention to detail by **Pradeep Rajput**
+
+[pradeeprajput-portfolio.netlify.app](https://pradeeprajput-portfolio.netlify.app) · [LinkedIn](https://linkedin.com/in/pradeeprajput) · [GitHub](https://github.com/pradeeprajput)
+
+</div>
